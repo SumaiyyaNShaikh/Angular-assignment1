@@ -1,0 +1,96 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h1 style="color: white;">Angular CURD</h1>
+        <div class="d-flex">
+            <button class="btn btn-success" (click)=" clickAddPerson()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Person</button>
+        </div>
+    </div>
+</nav>
+<div class="row">
+  <div class="col-md-3 "  *ngFor="let row of personData">
+    <div class="card shoadow p-3 mb-5 bg-body rounded h-100">
+      <div class="card-body">
+        <img [src]="row.Avatar" alt="" style="height: 150px; width: 120px;" class="border-look mx-auto shadow-md">
+        <p class="card-text"><small class="text-muted">Name:{{row.Name}}</small></p>
+        <p class="card-text"><small class="text-muted">Email:{{row.Email}}</small></p>
+        <p class="card-text"><small class="text-muted">Age:{{row.DOB |age}}</small></p>
+        <p class="card-text"><small class="text-muted">Country:{{row.country}}</small></p>
+      </div>
+      <div class="text-end">
+        <span style="color:white;" (click)="onEdit(row)" class=" btn btn-info" type="span" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</span>
+        <span (click)="deletePerson(row)" class="btn btn-danger mx-3">Delete</span>
+  
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <table class="table mt-3">
+    <thead>
+        <tr>
+            
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+            <th scope="col">Avatar</th>
+            <th scope="col">Country</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+        <tbody>
+        <tr  *ngFor="let row of personData">
+           
+            <td>{{row.Name}}</td>
+            <td>{{row.Email}}</td>
+            <td>{{row.DOB}}</td> 
+            <td>{{row.Avatar}}</td>
+            <td>{{row.country}}</td>
+          
+           <td>
+             <button style="color:white;" (click)="onEdit(row)" class=" btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+             <button (click)="deletePerson(row)" class="btn btn-danger mx-3">Delete</button>
+           </td>
+        </tr>
+        </tbody>
+</table>  -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Person Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formValue">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Name</label>
+                  <input type="text" formControlName="Name" class="form-control" id="exampleInputEmail1" aria-describedby="NameHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Email</label>
+                  <input type="email" formControlName="Email" class="form-control" id="exampleInputEmail">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputDOB" class="form-label">DoB</label>
+                    <input type="date" formControlName="DOB" class="form-control" id="exampleInputDOB">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputAvtar" class="form-label">avatar</label>
+                    <input type="text" formControlName="Avatar" class="form-control" id="exampleInputAvtar">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputCountry" class="form-label">Country</label>
+                    <input type="text" formControlName="country"  class="form-control" id="exampleInputCountry">
+                  </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button"  *ngIf="showAdd" class="btn btn-primary" (click)="postPersonDetails()">Add</button>
+          <button type="button"  *ngIf="showUpdate" class="btn btn-primary" (click)="updatePersonDetails()">update</button>
+        </div>
+      </div>
+    </div>
+  </div>
